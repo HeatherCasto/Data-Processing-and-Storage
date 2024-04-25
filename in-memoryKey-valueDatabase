@@ -1,0 +1,64 @@
+class InMemoryDB:
+    def __init__(self):
+        self.data = {}  # Dictionary to store key-value pairs
+        self.transaction_in_progress = False  # Flag to track transaction status
+        self.transaction_snapshot = None  # Snapshot of data before transaction
+
+    def begin_transaction(self):
+        if self.transaction_in_progress:
+            raise Exception("Transaction already in progress")
+        self.transaction_in_progress = True
+        self.transaction_snapshot = self.data.copy()
+
+    def put(self, key, value):
+        if not self.transaction_in_progress:
+            raise Exception("No transaction in progress")
+        self.data[key] = value
+
+    def get(self, key):
+        return self.data.get(key, None)
+
+    def commit(self):
+        if not self.transaction_in_progress:
+            raise Exception("No transaction in progress")
+        self.transaction_in_progress = False
+        self.transaction_snapshot = None
+
+    def rollback(self):
+        if not self.transaction_in_progress:
+            raise Exception("No transaction in progress")
+        self.data = self.transaction_snapshot
+        self.transaction_in_progress = False
+        self.transaction_snapshot = None
+
+# Example usage:
+inmemoryDB = InMemoryDB()
+print(inmemoryDB.get("A"))  # should return None
+
+inmemoryDB.put("A", 5)  # should raise an error
+
+inmemoryDB.begin_transaction()
+
+inmemoryDB.put("A", 5)
+print(inmemoryDB.get("A"))  # should return None
+
+inmemoryDB.put("A", 6)
+
+inmemoryDB.commit()
+
+print(inmemoryDB.get("A"))  # should return 6
+
+# Further test cases as described in Fig 2:
+inmemoryDB.commit()  # should raise an error
+
+inmemoryDB.rollback()  # should raise an error
+
+print(inmemoryDB.get("B"))  # should return None
+
+inmemoryDB.begin_transaction()
+
+inmemoryDB.put("B", 10)
+
+inmemoryDB.rollback()
+
+print(inmemoryDB.get("B"))  # should return None
