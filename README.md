@@ -1,7 +1,7 @@
 # Data-Processing-and-Storage
 ## In-Memory Key-Value Database
 
-This project implements an in-memory key-value database in Python that supports basic operations such as `put`, `get`, `begin_transaction`, `commit`, and `rollback`. Keys are strings and values are integers. The database supports transactions, ensuring that changes made within a transaction are only visible after committing.
+This project implements an in-memory key-value database in Python that supports basic operations such as `put`, `get`, `begin_transaction`, `commit`, and `rollback`. The database supports transactions, ensuring that changes made within a transaction are only visible after committing.
 
 ### How to Run the Code
 
@@ -10,10 +10,8 @@ This project implements an in-memory key-value database in Python that supports 
 3. Run the `main.py` file to execute the example usage provided in the code.
 
 ### Future Modifications
-To enhance this assignment for future iterations, consider the following modifications:
+The following modifications could be made to this assignment to enhance its pedagogical value for future students:
 
-Provide more detailed error messages for better debugging.
-Implement additional features such as support for different data types, concurrency control, or persistent storage.
-Write unit tests to ensure the correctness of the implementation.
-Include documentation using docstrings to describe each method and its parameters.
-Improve user interaction by implementing a command-line interface or integrating with a web framework for easier usage.
+1. Implement additional features such as support for different data types, concurrency control, or persistent storage.
+3. Have students write unit tests to ensure the correctness of the implementation or grade it based on set unit tests.
+4. Add a command-line interface to prioritize user interaction
